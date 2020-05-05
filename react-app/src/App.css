@@ -1,0 +1,14 @@
+.root {
+    min-width: 275px;
+}
+.pos {
+    margin-bottom: 12px;
+}
+.title {
+    font-size: 14px;
+}
+.main-page {
+    padding: auto;
+    margin: auto;
+    text-align: center;
+}
