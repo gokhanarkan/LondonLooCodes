@@ -14,11 +14,11 @@ def lambda_handler(event, context):
     '''
     mongo_url = os.environ.get('MONGO_URL')
 
-    client = MongoClient(mongo_url, retryWrites=False)
+    client = MongoClient(mongo_url)
 
     db_name = os.environ.get('DB_NAME')
     db = client[db_name]
-    collection = db.postloo
+    collection = db.posted_loos
 
     # Request from React app initializes as a json data
     # and created into a dictionary for Mongo entry

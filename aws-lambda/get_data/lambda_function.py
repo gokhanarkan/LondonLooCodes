@@ -19,6 +19,6 @@ def lambda_handler(event, context):
     
     db_name = os.environ.get('DB_NAME')
     db = client[db_name]
-    collection = db.ldnloo
+    collection = db.loos
 
     return dumps(collection.find())

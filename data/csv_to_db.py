@@ -12,14 +12,13 @@ def write_mongo(loos):
     @param loos: list of individual loos
     '''
 
-	mongo_url = os.environ.get('MONGO_URL')
-	client = MongoClient(mongo_url, retryWrites=False)
-    db_name = os.environ.get('DB_NAME')
-	db = client[db_name]
-	collection = db.ldnloo
+    mongo_url = os.environ.get('MONGO_URL')
+    client = MongoClient(mongo_url)
+    db = client['londonloo']
+    collection = db.loos
 
     for loo in loos:
-		collection.insert_one(loo)
+        collection.insert_one(loo)
 
 
 def read_csv():
@@ -30,21 +29,21 @@ def read_csv():
     loo_dict = []
 
     with open('csv/data.csv', 'r', encoding='utf-8') as csvfile:
-		csv_reader = csv.reader(csvfile, delimiter=',')
-		for row in csv_reader:
-			data = {
-				'name': row[0],
-				'rough_location': row[1],
-				'code': row[2],
-				'nearest_station': row[3],
-				'address': row[4],
-				'accessible': row[5],
-				'gender_neutral': row[6],
-				'date': row[7],
-				'full_address': row[8],
-				'lat': row[9],
-				'long': row[10]
-			}
+        csv_reader = csv.reader(csvfile, delimiter=',')
+        for row in csv_reader:
+            data = {
+                'name': row[0],
+                'rough_location': row[1],
+                'code': row[2],
+                'nearest_station': row[3],
+                'address': row[4],
+                'accessible': row[5],
+                'gender_neutral': row[6],
+                'date': row[7],
+                'full_address': row[8],
+                'lat': row[9],
+                'long': row[10]
+            }
             loo_dict.append(data)
 
     return loo_dict
