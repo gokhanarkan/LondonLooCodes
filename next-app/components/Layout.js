@@ -239,9 +239,7 @@ const Layout = ({ children }) => {
                 aria-labelledby="primary-heading"
                 className="min-w-0 flex-1 h-full flex flex-col overflow-hidden lg:order-last"
               >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <div className="max-w-3xl mx-auto">{children}</div>
-                </div>
+               {children}
               </section>
             </main>
           </div>
