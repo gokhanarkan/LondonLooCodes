@@ -13,7 +13,10 @@ import {
   PhotographIcon,
   XIcon,
 } from "@heroicons/react/outline";
+
 import { SearchIcon } from "@heroicons/react/solid";
+
+import Fuse from "fuse.js";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -22,6 +25,9 @@ function classNames(...classes) {
 const Layout = ({ children }) => {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const codes = children.props.codes;
+  const fuse = new Fuse(codes, {keys: ["name", "rough_location", "address"]});
 
   const sidebarNavigation = [
     {
@@ -43,6 +49,12 @@ const Layout = ({ children }) => {
       current: router.pathname === "/map",
     },
   ];
+
+
+  const searchCode = (e) => {
+    const term = e.target.value;
+    console.log(fuse.search(term));
+  }
 
   return (
     <>
@@ -210,7 +222,7 @@ const Layout = ({ children }) => {
               <div className="flex-1 flex justify-between px-4 sm:px-6">
                 <div className="flex-1 flex">
                   <form className="w-full flex md:ml-0" action="#" method="GET">
-                    <label htmlFor="search_field" className="sr-only">
+                    <label htmlFor="search" className="sr-only">
                       Search all files
                     </label>
                     <div className="relative w-full text-gray-400 focus-within:text-gray-600">
@@ -221,11 +233,12 @@ const Layout = ({ children }) => {
                         />
                       </div>
                       <input
-                        name="search_field"
-                        id="search_field"
+                        name="search"
+                        id="search"
                         className="h-full w-full border-transparent py-2 pl-8 pr-3 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-gray-400"
                         placeholder="Search"
                         type="search"
+                        onChange={searchCode}
                       />
                     </div>
                   </form>
